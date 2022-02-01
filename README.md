@@ -5,3 +5,4 @@ This repo contains code for ML Alert Prediction Service
 * Never commit a **config file** with all the credentials
 * All the code files should be script files and no jupyter notebooks can be committed 
 * Every commit has to be assciated with an appropriate comment 
+* Code should not contain any print statements and loggers have to be used as an appropriate substitute
