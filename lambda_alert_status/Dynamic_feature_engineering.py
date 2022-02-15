@@ -17,19 +17,19 @@ logger = logging.getLogger('ml_pred')
 
 
 
-
+# THE BELOW FUNCTION CONVERTS K*10 TEMP SEVERITY READINGS  TO FARENHEIT/CELCIUS
 def convert_temp_severity(pred_value):
      
         return int(10*(5/9)*360* pred_value * 10)
     
 
     
-    
+# THE BELOW FUNCTION CONVERTS KELVIN TIMES 10 SECODNS READINGS TO FARENHIET 
 def k_to_f (x):
     return(np.round(( x/ 10) * (9 / 5) / 60 / 6) / 10)
 
 
-
+# THE BELOW FUNCTION CALCULATES AND RETURNS THE AVERAGE OVER LAST #WINDOW NUMBER OF PREDICTIONS
 def get_prediction_average(connection, smac, idt, window):
 
     
@@ -59,7 +59,7 @@ def get_prediction_average(connection, smac, idt, window):
     return(avg)
 
 
-
+# THE BELOW FUCNTION CALCULATES RETURNS THE ALERT SETTINGS ASSOCIATED WITH A PARTICULAR SMAC 
 def get_alert_threshold (smac ,connection):
     
     
@@ -89,7 +89,7 @@ def get_alert_threshold (smac ,connection):
     return(-1)
     
     
-    
+# THE BELOW FUNCTION CALCULATES THE WEIGHTED AVERAGE    
 def weighted_average (x):
     
     x = list(x)
@@ -102,6 +102,7 @@ def weighted_average (x):
     return (w_avg / sum(list(range(1,len(x)+1))))
 
 
+# THE BELOW FUCNTION COMPARES THE AVERAGE PREDICTION WITH ALERT THRESHOLD AND RETURNS THE TYPE OF COMMUNICATION TO BE SENT 
 def get_alert_comm (avg_prediction, alert_threshold):
        
     logger.info("AVERAGE... "+ str(k_to_f(avg_prediction)))
@@ -132,7 +133,7 @@ def get_alert_comm (avg_prediction, alert_threshold):
     
     return(comm_type)
     
-
+# THE BELOW FUCNTION CALCULATES IF A PARTICULAR SENSOR NEEDS TO BE ALERTED BASED ON THE PREDICTIONS 
 def get_alert_decision (smac, idt, window, db ,config_file = "config.yaml"):
     
     initial_condition_timestamp = dt.datetime.fromtimestamp(idt / 1000)
